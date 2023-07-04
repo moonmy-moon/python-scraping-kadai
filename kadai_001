@@ -1,0 +1,28 @@
+"""
+元のyahoo記事のURL
+↓↓↓↓↓↓↓↓↓↓↓↓
+
+https://news.yahoo.co.jp/articles/b7635e54f0bd570f10da8e2699bced24fc198a41
+"""
+
+
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://news.yahoo.co.jp/articles/b7635e54f0bd570f10da8e2699bced24fc198a41"
+
+# GETリクエスト送信、HTML取得
+response = requests.get(url)
+
+# HTML解析
+soup = BeautifulSoup(response.text, "html.parser")
+
+# 本文要素取得
+# CSSセレクタ使用で本文取得
+main_element = soup.select_one(".sc-hcmsbg")
+
+# 本文取得
+main_text = main_element.text
+
+# 本文表示
+print(main_text)
